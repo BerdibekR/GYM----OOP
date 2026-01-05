@@ -1,10 +1,11 @@
 package com.berdibek.gym;
 
 public class Member {
-    private int memberId;
-    private String name;
-    private int age;
-    private String membershipType;
+
+    protected int memberId;
+    protected String name;
+    protected int age;
+    protected String membershipType;
 
     public Member(int memberId, String name, int age, String membershipType) {
         this.memberId = memberId;
@@ -13,43 +14,16 @@ public class Member {
         this.membershipType = membershipType;
     }
 
-    public Member() {
-        this.memberId = 0;
-        this.name = "Unknown Name";
-        this.age = 0;
-        this.membershipType = "None";
+    public void workout() {
+        System.out.println(name + " is doing a regular workout.");
     }
 
-    public int getMemberId() {
-        return memberId;
+    public String getRole() {
+        return "Gym Member";
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public String getMembershipType() {
-        return membershipType;
-    }
-
-    public void setMemberId(int memberId) {
-        this.memberId = memberId;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setMembershipType(String membershipType) {
-        this.membershipType = membershipType;
+    public boolean isAdult() {
+        return age >= 18;
     }
 
     public boolean isActive() {
@@ -57,16 +31,14 @@ public class Member {
     }
 
     public void upgrade() {
-        this.membershipType = "Premium";
+        membershipType = "Premium";
     }
 
     @Override
     public String toString() {
-        return "Member{" +
-                "memberId=" + memberId +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", membershipType='" + membershipType + '\'' +
-                '}';
+        return "[" + getRole() + "] " + name +
+                " (ID: " + memberId +
+                ", Age: " + age +
+                ", Type: " + membershipType + ")";
     }
 }
