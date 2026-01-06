@@ -5,8 +5,7 @@ public class CardioSession extends WorkoutSession {
     private int caloriesTarget;
 
     public CardioSession(int id, String memberName, String trainerName, int duration, boolean completed, int caloriesTarget) {
-
-        super(id, memberName, trainerName, duration, completed); // must be first
+        super(id, memberName, trainerName, duration, completed);
         this.caloriesTarget = caloriesTarget;
     }
 

@@ -4,8 +4,7 @@ public class PremiumMember extends Member {
 
     private boolean personalTrainerAccess;
 
-    public PremiumMember(int id, String name, int age,
-                         String membershipType, boolean trainerAccess) {
+    public PremiumMember(int id, String name, int age, String membershipType, boolean trainerAccess) {
         super(id, name, age, membershipType);
         this.personalTrainerAccess = trainerAccess;
     }

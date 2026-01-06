@@ -4,8 +4,7 @@ public class GroupTrainer extends Trainer {
 
     private int groupSize;
 
-    public GroupTrainer(int id, String name, String specialization,
-                        int experienceYears, int groupSize) {
+    public GroupTrainer(int id, String name, String specialization, int experienceYears, int groupSize) {
         super(id, name, specialization, experienceYears);
         this.groupSize = groupSize;
     }

@@ -7,8 +7,7 @@ public class Trainer {
     protected String specialization;
     protected int experienceYears;
 
-    public Trainer(int trainerId, String name,
-                   String specialization, int experienceYears) {
+    public Trainer(int trainerId, String name, String specialization, int experienceYears) {
 
         this.trainerId = trainerId;
         this.name = name;
@@ -16,10 +15,8 @@ public class Trainer {
         this.experienceYears = experienceYears;
     }
 
-    // -------- METHODS TO OVERRIDE --------
     public void conductSession() {
-        System.out.println("Trainer " + name +
-                " is conducting a general workout session.");
+        System.out.println("Trainer " + name + " is conducting a general workout session.");
     }
 
     public String getRole() {

@@ -5,9 +5,7 @@ public class SeniorMember extends Member {
     private int retirementAge;
     private double healthDiscount;
 
-    public SeniorMember(int id, String name, int age,
-                        String type, int retirementAge,
-                        double healthDiscount) {
+    public SeniorMember(int id, String name, int age, String type, int retirementAge, double healthDiscount) {
         super(id, name, age, type);
         this.retirementAge = retirementAge;
         this.healthDiscount = healthDiscount;

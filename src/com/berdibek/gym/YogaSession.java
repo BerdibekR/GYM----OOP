@@ -5,9 +5,7 @@ public class YogaSession extends WorkoutSession {
     private String difficultyLevel;
     private boolean meditationIncluded;
 
-    public YogaSession(int id, String memberName, String trainerName,
-                       int duration, boolean completed,
-                       String difficultyLevel, boolean meditationIncluded) {
+    public YogaSession(int id, String memberName, String trainerName, int duration, boolean completed, String difficultyLevel, boolean meditationIncluded) {
 
         super(id, memberName, trainerName, duration, completed);
         this.difficultyLevel = difficultyLevel;

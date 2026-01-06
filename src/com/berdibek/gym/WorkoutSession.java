@@ -17,7 +17,6 @@ public class WorkoutSession {
         this.completed = completed;
     }
 
-    // ---------- METHODS TO OVERRIDE ----------
     public void start() {
         System.out.println("Workout session for " + memberName + " has started.");
     }

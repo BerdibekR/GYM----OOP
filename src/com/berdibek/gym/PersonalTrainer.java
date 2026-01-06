@@ -4,9 +4,8 @@ public class PersonalTrainer extends Trainer {
 
     private int clientsCount;
 
-    public PersonalTrainer(int id, String name, String specialization,
-                           int experienceYears, int clientsCount) {
-        super(id, name, specialization, experienceYears); // MUST be first
+    public PersonalTrainer(int id, String name, String specialization, int experienceYears, int clientsCount) {
+        super(id, name, specialization, experienceYears);
         this.clientsCount = clientsCount;
     }
 

@@ -4,9 +4,7 @@ public class StrengthSession extends WorkoutSession {
 
     private String muscleGroup;
 
-    public StrengthSession(int id, String memberName, String trainerName,
-                           int duration, boolean completed,
-                           String muscleGroup) {
+    public StrengthSession(int id, String memberName, String trainerName, int duration, boolean completed, String muscleGroup) {
 
         super(id, memberName, trainerName, duration, completed);
         this.muscleGroup = muscleGroup;
