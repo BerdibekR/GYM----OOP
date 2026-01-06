@@ -6,22 +6,25 @@ public class PremiumMember extends Member {
 
     public PremiumMember(int id, String name, int age, String membershipType, boolean trainerAccess) {
         super(id, name, age, membershipType);
-        this.personalTrainerAccess = trainerAccess;
+        setPersonalTrainerAccess(trainerAccess);
+    }
+
+    public void setPersonalTrainerAccess(boolean access) {
+        this.personalTrainerAccess = access;
+    }
+
+    public boolean hasTrainerAccess() {
+        return personalTrainerAccess;
     }
 
     @Override
     public void workout() {
-        System.out.println("Premium member " + name +
-                " is training in VIP zone with advanced equipment.");
+        System.out.println("Premium member " + name + " is training in VIP zone with advanced equipment.");
     }
 
     @Override
     public String getRole() {
         return "Premium Member";
-    }
-
-    public boolean hasTrainerAccess() {
-        return personalTrainerAccess;
     }
 
     @Override

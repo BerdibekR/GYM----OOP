@@ -6,7 +6,20 @@ public class StudentMember extends Member {
 
     public StudentMember(int id, String name, int age, String membershipType, String university) {
         super(id, name, age, membershipType);
-        this.university = university;
+        setUniversity(university);
+    }
+
+    public void setUniversity(String university) {
+        if (university != null && !university.trim().isEmpty()) {
+            this.university = university;
+        } else {
+            System.out.println(" University cannot be empty. Setting to 'Unknown University'.");
+            this.university = "Unknown University";
+        }
+    }
+
+    public String getUniversity() {
+        return university;
     }
 
     @Override

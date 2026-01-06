@@ -6,18 +6,35 @@ public class YogaSession extends WorkoutSession {
     private boolean meditationIncluded;
 
     public YogaSession(int id, String memberName, String trainerName, int duration, boolean completed, String difficultyLevel, boolean meditationIncluded) {
-
         super(id, memberName, trainerName, duration, completed);
-        this.difficultyLevel = difficultyLevel;
+        setDifficultyLevel(difficultyLevel);
+        setMeditationIncluded(meditationIncluded);
+    }
+
+    public void setDifficultyLevel(String difficultyLevel) {
+        if (difficultyLevel != null && !difficultyLevel.trim().isEmpty()) {
+            this.difficultyLevel = difficultyLevel;
+        } else {
+            System.out.println(" Difficulty level cannot be empty. Setting to 'Beginner'.");
+            this.difficultyLevel = "Beginner";
+        }
+    }
+
+    public void setMeditationIncluded(boolean meditationIncluded) {
         this.meditationIncluded = meditationIncluded;
+    }
+
+    public String getDifficultyLevel() {
+        return difficultyLevel;
+    }
+
+    public boolean isMeditationIncluded() {
+        return meditationIncluded;
     }
 
     @Override
     public void start() {
-        System.out.println(memberName +
-                " has started a " + difficultyLevel +
-                " yoga session" +
-                (meditationIncluded ? " with meditation." : "."));
+        System.out.println(memberName + " has started a " + difficultyLevel + " yoga session" + (meditationIncluded ? " with meditation." : "."));
     }
 
     @Override

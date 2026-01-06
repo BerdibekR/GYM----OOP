@@ -6,7 +6,20 @@ public class PersonalTrainer extends Trainer {
 
     public PersonalTrainer(int id, String name, String specialization, int experienceYears, int clientsCount) {
         super(id, name, specialization, experienceYears);
-        this.clientsCount = clientsCount;
+        setClientsCount(clientsCount);
+    }
+
+    public void setClientsCount(int clientsCount) {
+        if (clientsCount >= 0) {
+            this.clientsCount = clientsCount;
+        } else {
+            System.out.println(" Clients count cannot be negative. Setting to 0.");
+            this.clientsCount = 0;
+        }
+    }
+
+    public int getClientsCount() {
+        return clientsCount;
     }
 
     @Override

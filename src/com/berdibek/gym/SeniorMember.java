@@ -7,14 +7,39 @@ public class SeniorMember extends Member {
 
     public SeniorMember(int id, String name, int age, String type, int retirementAge, double healthDiscount) {
         super(id, name, age, type);
-        this.retirementAge = retirementAge;
-        this.healthDiscount = healthDiscount;
+        setRetirementAge(retirementAge);
+        setHealthDiscount(healthDiscount);
+    }
+
+    public void setRetirementAge(int retirementAge) {
+        if (retirementAge >= 50 && retirementAge <= 80) {
+            this.retirementAge = retirementAge;
+        } else {
+            System.out.println(" Retirement age must be between 50 and 80. Setting default = 60.");
+            this.retirementAge = 60;
+        }
+    }
+
+    public void setHealthDiscount(double healthDiscount) {
+        if (healthDiscount >= 0 && healthDiscount <= 100) {
+            this.healthDiscount = healthDiscount;
+        } else {
+            System.out.println(" Discount must be between 0 and 100%. Setting to 0%.");
+            this.healthDiscount = 0;
+        }
+    }
+
+    public int getRetirementAge() {
+        return retirementAge;
+    }
+
+    public double getHealthDiscount() {
+        return healthDiscount;
     }
 
     @Override
     public void workout() {
-        System.out.println("Senior member " + name +
-                " is doing light health-care exercises.");
+        System.out.println("Senior member " + name + " is doing light health-care exercises.");
     }
 
     @Override

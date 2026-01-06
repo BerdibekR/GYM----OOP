@@ -9,9 +9,36 @@ public class Member {
 
     public Member(int memberId, String name, int age, String membershipType) {
         this.memberId = memberId;
-        this.name = name;
-        this.age = age;
-        this.membershipType = membershipType;
+        setName(name);
+        setAge(age);
+        setMembershipType(membershipType);
+    }
+
+    public void setName(String name) {
+        if (name != null && !name.trim().isEmpty()) {
+            this.name = name;
+        } else {
+            System.out.println(" Name cannot be empty. Setting to 'Unknown'.");
+            this.name = "Unknown";
+        }
+    }
+
+    public void setAge(int age) {
+        if (age >= 0) {
+            this.age = age;
+        } else {
+            System.out.println(" Age cannot be negative. Setting to 0.");
+            this.age = 0;
+        }
+    }
+
+    public void setMembershipType(String membershipType) {
+        if (membershipType != null && !membershipType.trim().isEmpty()) {
+            this.membershipType = membershipType;
+        } else {
+            System.out.println(" Membership type cannot be empty. Setting to 'None'.");
+            this.membershipType = "None";
+        }
     }
 
     public void workout() {
@@ -37,8 +64,7 @@ public class Member {
     @Override
     public String toString() {
         return "[" + getRole() + "] " + name +
-                " (ID: " + memberId +
-                ", Age: " + age +
+                " (ID: " + memberId + ", Age: " + age +
                 ", Type: " + membershipType + ")";
     }
 }

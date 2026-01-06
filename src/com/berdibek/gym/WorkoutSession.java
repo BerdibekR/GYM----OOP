@@ -11,9 +11,40 @@ public class WorkoutSession {
     public WorkoutSession(int sessionId, String memberName, String trainerName, int durationMinutes, boolean completed) {
 
         this.sessionId = sessionId;
-        this.memberName = memberName;
-        this.trainerName = trainerName;
-        this.durationMinutes = durationMinutes;
+        setMemberName(memberName);
+        setTrainerName(trainerName);
+        setDurationMinutes(durationMinutes);
+        setCompleted(completed);
+    }
+
+    public void setMemberName(String memberName) {
+        if (memberName != null && !memberName.trim().isEmpty()) {
+            this.memberName = memberName;
+        } else {
+            System.out.println(" Member name cannot be empty. Setting to 'Unknown Member'.");
+            this.memberName = "Unknown Member";
+        }
+    }
+
+    public void setTrainerName(String trainerName) {
+        if (trainerName != null && !trainerName.trim().isEmpty()) {
+            this.trainerName = trainerName;
+        } else {
+            System.out.println(" Trainer name cannot be empty. Setting to 'Unknown Trainer'.");
+            this.trainerName = "Unknown Trainer";
+        }
+    }
+
+    public void setDurationMinutes(int durationMinutes) {
+        if (durationMinutes > 0) {
+            this.durationMinutes = durationMinutes;
+        } else {
+            System.out.println(" Duration must be greater than 0. Setting to 30 by default.");
+            this.durationMinutes = 30;
+        }
+    }
+
+    public void setCompleted(boolean completed) {
         this.completed = completed;
     }
 

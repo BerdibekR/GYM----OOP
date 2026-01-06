@@ -7,13 +7,25 @@ public class StrengthSession extends WorkoutSession {
     public StrengthSession(int id, String memberName, String trainerName, int duration, boolean completed, String muscleGroup) {
 
         super(id, memberName, trainerName, duration, completed);
-        this.muscleGroup = muscleGroup;
+        setMuscleGroup(muscleGroup);
+    }
+
+    public void setMuscleGroup(String muscleGroup) {
+        if (muscleGroup != null && !muscleGroup.trim().isEmpty()) {
+            this.muscleGroup = muscleGroup;
+        } else {
+            System.out.println(" Muscle group cannot be empty. Setting to 'General'.");
+            this.muscleGroup = "General";
+        }
+    }
+
+    public String getMuscleGroup() {
+        return muscleGroup;
     }
 
     @Override
     public void start() {
-        System.out.println(memberName +
-                " is doing strength training for: " + muscleGroup);
+        System.out.println(memberName + " is doing strength training for: " + muscleGroup);
     }
 
     @Override
