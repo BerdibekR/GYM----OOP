@@ -10,12 +10,10 @@ public class PersonalTrainer extends Trainer {
     }
 
     public void setClientsCount(int clientsCount) {
-        if (clientsCount >= 0) {
-            this.clientsCount = clientsCount;
-        } else {
-            System.out.println(" Clients count cannot be negative. Setting to 0.");
-            this.clientsCount = 0;
+        if (clientsCount < 0) {
+            throw new IllegalArgumentException("Clients count cannot be negative.");
         }
+        this.clientsCount = clientsCount;
     }
 
     public int getClientsCount() {

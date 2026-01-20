@@ -12,21 +12,17 @@ public class SeniorMember extends Member {
     }
 
     public void setRetirementAge(int retirementAge) {
-        if (retirementAge >= 50 && retirementAge <= 80) {
-            this.retirementAge = retirementAge;
-        } else {
-            System.out.println(" Retirement age must be between 50 and 80. Setting default = 60.");
-            this.retirementAge = 60;
+        if (retirementAge < 50 || retirementAge > 80) {
+            throw new IllegalArgumentException("Retirement age must be between 50 and 80.");
         }
+        this.retirementAge = retirementAge;
     }
 
     public void setHealthDiscount(double healthDiscount) {
-        if (healthDiscount >= 0 && healthDiscount <= 100) {
-            this.healthDiscount = healthDiscount;
-        } else {
-            System.out.println(" Discount must be between 0 and 100%. Setting to 0%.");
-            this.healthDiscount = 0;
+        if (healthDiscount < 0 || healthDiscount > 100) {
+            throw new IllegalArgumentException("Health discount must be between 0 and 100.");
         }
+        this.healthDiscount = healthDiscount;
     }
 
     public int getRetirementAge() {

@@ -5,18 +5,15 @@ public class GroupTrainer extends Trainer {
     private int groupSize;
 
     public GroupTrainer(int id, String name, String specialization, int experienceYears, int groupSize) {
-
         super(id, name, specialization, experienceYears);
         setGroupSize(groupSize);
     }
 
     public void setGroupSize(int groupSize) {
-        if (groupSize >= 1) {
-            this.groupSize = groupSize;
-        } else {
-            System.out.println(" Group size must be at least 1. Setting to 1.");
-            this.groupSize = 1;
+        if (groupSize < 1) {
+            throw new IllegalArgumentException("Group size must be at least 1.");
         }
+        this.groupSize = groupSize;
     }
 
     public int getGroupSize() {
@@ -25,7 +22,8 @@ public class GroupTrainer extends Trainer {
 
     @Override
     public void conductSession() {
-        System.out.println("Group Trainer " + name + " is leading a group workout for " + groupSize + " people.");
+        System.out.println("Group Trainer " + name +
+                " is leading a group workout for " + groupSize + " people.");
     }
 
     @Override

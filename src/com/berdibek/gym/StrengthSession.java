@@ -4,19 +4,18 @@ public class StrengthSession extends WorkoutSession {
 
     private String muscleGroup;
 
-    public StrengthSession(int id, String memberName, String trainerName, int duration, boolean completed, String muscleGroup) {
+    public StrengthSession(int id, String memberName, String trainerName,
+                           int duration, boolean completed, String muscleGroup) {
 
         super(id, memberName, trainerName, duration, completed);
         setMuscleGroup(muscleGroup);
     }
 
     public void setMuscleGroup(String muscleGroup) {
-        if (muscleGroup != null && !muscleGroup.trim().isEmpty()) {
-            this.muscleGroup = muscleGroup;
-        } else {
-            System.out.println(" Muscle group cannot be empty. Setting to 'General'.");
-            this.muscleGroup = "General";
+        if (muscleGroup == null || muscleGroup.trim().isEmpty()) {
+            throw new IllegalArgumentException("Muscle group cannot be empty.");
         }
+        this.muscleGroup = muscleGroup;
     }
 
     public String getMuscleGroup() {
@@ -25,7 +24,8 @@ public class StrengthSession extends WorkoutSession {
 
     @Override
     public void start() {
-        System.out.println(memberName + " is doing strength training for: " + muscleGroup);
+        System.out.println(memberName +
+                " is doing strength training for: " + muscleGroup);
     }
 
     @Override

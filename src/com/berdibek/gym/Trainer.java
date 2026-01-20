@@ -1,6 +1,6 @@
 package com.berdibek.gym;
 
-public class Trainer {
+public abstract class Trainer {
 
     protected int trainerId;
     protected String name;
@@ -8,45 +8,41 @@ public class Trainer {
     protected int experienceYears;
 
     public Trainer(int trainerId, String name, String specialization, int experienceYears) {
-        this.trainerId = trainerId;
+        setTrainerId(trainerId);
         setName(name);
         setSpecialization(specialization);
         setExperienceYears(experienceYears);
     }
 
-    public void setName(String name) {
-        if (name != null && !name.trim().isEmpty()) {
-            this.name = name;
-        } else {
-            System.out.println(" Name cannot be empty. Setting to 'Unknown Trainer'.");
-            this.name = "Unknown Trainer";
+    public abstract void conductSession();
+    public abstract String getRole();
+
+    public void setTrainerId(int trainerId) {
+        if (trainerId <= 0) {
+            throw new IllegalArgumentException("Trainer ID must be positive.");
         }
+        this.trainerId = trainerId;
+    }
+
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Trainer name cannot be empty.");
+        }
+        this.name = name;
     }
 
     public void setSpecialization(String specialization) {
-        if (specialization != null && !specialization.trim().isEmpty()) {
-            this.specialization = specialization;
-        } else {
-            System.out.println(" Specialization cannot be empty. Setting to 'General Fitness'.");
-            this.specialization = "General Fitness";
+        if (specialization == null || specialization.trim().isEmpty()) {
+            throw new IllegalArgumentException("Specialization cannot be empty.");
         }
+        this.specialization = specialization;
     }
 
     public void setExperienceYears(int experienceYears) {
-        if (experienceYears >= 0) {
-            this.experienceYears = experienceYears;
-        } else {
-            System.out.println(" Experience cannot be negative. Setting to 0.");
-            this.experienceYears = 0;
+        if (experienceYears < 0) {
+            throw new IllegalArgumentException("Experience years cannot be negative.");
         }
-    }
-
-    public void conductSession() {
-        System.out.println("Trainer " + name + " is conducting a general workout session.");
-    }
-
-    public String getRole() {
-        return "Trainer";
+        this.experienceYears = experienceYears;
     }
 
     public boolean isSeniorCoach() {

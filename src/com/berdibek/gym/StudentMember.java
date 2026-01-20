@@ -10,12 +10,10 @@ public class StudentMember extends Member {
     }
 
     public void setUniversity(String university) {
-        if (university != null && !university.trim().isEmpty()) {
-            this.university = university;
-        } else {
-            System.out.println(" University cannot be empty. Setting to 'Unknown University'.");
-            this.university = "Unknown University";
+        if (university == null || university.trim().isEmpty()) {
+            throw new IllegalArgumentException("University cannot be empty.");
         }
+        this.university = university;
     }
 
     public String getUniversity() {
