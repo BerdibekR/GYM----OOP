@@ -1,19 +1,22 @@
 package com.berdibek.gym;
 
+import exception.InvalidInputException;
+
 public class StrengthSession extends WorkoutSession {
 
     private String muscleGroup;
 
     public StrengthSession(int id, String memberName, String trainerName,
-                           int duration, boolean completed, String muscleGroup) {
+                           int duration, boolean completed, String muscleGroup)
+            throws InvalidInputException {
 
         super(id, memberName, trainerName, duration, completed);
         setMuscleGroup(muscleGroup);
     }
 
-    public void setMuscleGroup(String muscleGroup) {
+    public void setMuscleGroup(String muscleGroup) throws InvalidInputException {
         if (muscleGroup == null || muscleGroup.trim().isEmpty()) {
-            throw new IllegalArgumentException("Muscle group cannot be empty.");
+            throw new InvalidInputException("Muscle group cannot be empty.");
         }
         this.muscleGroup = muscleGroup;
     }

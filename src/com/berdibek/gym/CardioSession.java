@@ -1,19 +1,22 @@
 package com.berdibek.gym;
 
+import exception.InvalidInputException;
+
 public class CardioSession extends WorkoutSession {
 
     private int caloriesTarget;
 
     public CardioSession(int id, String memberName, String trainerName,
-                         int duration, boolean completed, int caloriesTarget) {
+                         int duration, boolean completed, int caloriesTarget)
+            throws InvalidInputException {
 
         super(id, memberName, trainerName, duration, completed);
         setCaloriesTarget(caloriesTarget);
     }
 
-    public void setCaloriesTarget(int caloriesTarget) {
+    public void setCaloriesTarget(int caloriesTarget) throws InvalidInputException {
         if (caloriesTarget < 50) {
-            throw new IllegalArgumentException("Calories target must be at least 50.");
+            throw new InvalidInputException("Calories target must be at least 50.");
         }
         this.caloriesTarget = caloriesTarget;
     }

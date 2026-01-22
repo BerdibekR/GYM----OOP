@@ -1,17 +1,22 @@
 package com.berdibek.gym;
 
+import exception.InvalidInputException;
+
 public class GroupTrainer extends Trainer {
 
     private int groupSize;
 
-    public GroupTrainer(int id, String name, String specialization, int experienceYears, int groupSize) {
+    public GroupTrainer(int id, String name, String specialization,
+                        int experienceYears, int groupSize)
+            throws InvalidInputException {
+
         super(id, name, specialization, experienceYears);
         setGroupSize(groupSize);
     }
 
-    public void setGroupSize(int groupSize) {
+    public void setGroupSize(int groupSize) throws InvalidInputException {
         if (groupSize < 1) {
-            throw new IllegalArgumentException("Group size must be at least 1.");
+            throw new InvalidInputException("Group size must be at least 1.");
         }
         this.groupSize = groupSize;
     }

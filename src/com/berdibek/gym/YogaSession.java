@@ -1,5 +1,7 @@
 package com.berdibek.gym;
 
+import exception.InvalidInputException;
+
 public class YogaSession extends WorkoutSession {
 
     private String difficultyLevel;
@@ -7,16 +9,17 @@ public class YogaSession extends WorkoutSession {
 
     public YogaSession(int id, String memberName, String trainerName,
                        int duration, boolean completed,
-                       String difficultyLevel, boolean meditationIncluded) {
+                       String difficultyLevel, boolean meditationIncluded)
+            throws InvalidInputException {
 
         super(id, memberName, trainerName, duration, completed);
         setDifficultyLevel(difficultyLevel);
         setMeditationIncluded(meditationIncluded);
     }
 
-    public void setDifficultyLevel(String difficultyLevel) {
+    public void setDifficultyLevel(String difficultyLevel) throws InvalidInputException {
         if (difficultyLevel == null || difficultyLevel.trim().isEmpty()) {
-            throw new IllegalArgumentException("Difficulty level cannot be empty.");
+            throw new InvalidInputException("Difficulty level cannot be empty.");
         }
         this.difficultyLevel = difficultyLevel;
     }

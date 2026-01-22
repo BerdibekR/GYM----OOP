@@ -1,5 +1,7 @@
 package com.berdibek.gym;
 
+import exception.InvalidInputException;
+
 public abstract class Trainer {
 
     protected int trainerId;
@@ -7,7 +9,9 @@ public abstract class Trainer {
     protected String specialization;
     protected int experienceYears;
 
-    public Trainer(int trainerId, String name, String specialization, int experienceYears) {
+    public Trainer(int trainerId, String name, String specialization, int experienceYears)
+            throws InvalidInputException {
+
         setTrainerId(trainerId);
         setName(name);
         setSpecialization(specialization);
@@ -17,43 +21,27 @@ public abstract class Trainer {
     public abstract void conductSession();
     public abstract String getRole();
 
-    public void setTrainerId(int trainerId) {
-        if (trainerId <= 0) {
-            throw new IllegalArgumentException("Trainer ID must be positive.");
-        }
+    public void setTrainerId(int trainerId) throws InvalidInputException {
+        if (trainerId <= 0)
+            throw new InvalidInputException("Trainer ID must be positive.");
         this.trainerId = trainerId;
     }
 
-    public void setName(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Trainer name cannot be empty.");
-        }
+    public void setName(String name) throws InvalidInputException {
+        if (name == null || name.trim().isEmpty())
+            throw new InvalidInputException("Trainer name cannot be empty.");
         this.name = name;
     }
 
-    public void setSpecialization(String specialization) {
-        if (specialization == null || specialization.trim().isEmpty()) {
-            throw new IllegalArgumentException("Specialization cannot be empty.");
-        }
+    public void setSpecialization(String specialization) throws InvalidInputException {
+        if (specialization == null || specialization.trim().isEmpty())
+            throw new InvalidInputException("Specialization cannot be empty.");
         this.specialization = specialization;
     }
 
-    public void setExperienceYears(int experienceYears) {
-        if (experienceYears < 0) {
-            throw new IllegalArgumentException("Experience years cannot be negative.");
-        }
+    public void setExperienceYears(int experienceYears) throws InvalidInputException {
+        if (experienceYears < 0)
+            throw new InvalidInputException("Experience cannot be negative.");
         this.experienceYears = experienceYears;
-    }
-
-    public boolean isSeniorCoach() {
-        return experienceYears >= 5;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + getRole() + "] " + name +
-                " (ID: " + trainerId +
-                ", Spec: " + specialization +
-                ", Exp: " + experienceYears + " yrs)";
     }
 }
