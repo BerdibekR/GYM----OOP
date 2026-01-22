@@ -17,19 +17,15 @@ public class MenuManager implements Menu {
         seedData();
     }
 
-    // ===== INITIAL DATA WITH TRY-CATCH =====
     private void seedData() {
         try {
-            // Members
             members.add(new StudentMember(1, "Dastan", 19, "Student", "AITU"));
             members.add(new PremiumMember(2, "Aibek", 28, "Premium", true));
             members.add(new SeniorMember(3, "Samat", 61, "Senior", 60, 15));
 
-            // Trainers
             trainers.add(new PersonalTrainer(101, "Aidar", "Strength", 4, 12));
             trainers.add(new GroupTrainer(102, "Dana", "Yoga", 3, 18));
 
-            // Sessions
             sessions.add(new CardioSession(1001, "Dastan", "Aidar", 45, true, 380));
             sessions.add(new StrengthSession(1002, "Aibek", "Dana", 70, false, "Chest"));
             sessions.add(new YogaSession(1003, "Aruzhan", "Dana", 50, false, "Intermediate", true));
@@ -39,7 +35,6 @@ public class MenuManager implements Menu {
         }
     }
 
-    // ===== MAIN MENU =====
     @Override
     public void displayMenu() {
         System.out.println("\n========== GYM MANAGEMENT ==========");
@@ -74,7 +69,6 @@ public class MenuManager implements Menu {
         scanner.close();
     }
 
-    // ===== MEMBER MENU =====
     private void memberMenu() {
         System.out.println("\n------ MEMBER MENU ------");
         System.out.println("1. View All Members");
@@ -95,7 +89,6 @@ public class MenuManager implements Menu {
         }
     }
 
-    // ===== TRAINER MENU =====
     private void trainerMenu() {
         System.out.println("\n------ TRAINER MENU ------");
         System.out.println("1. View All Trainers");
@@ -116,7 +109,6 @@ public class MenuManager implements Menu {
         }
     }
 
-    // ===== SESSION MENU =====
     private void sessionMenu() {
         System.out.println("\n------ SESSION MENU ------");
         System.out.println("1. View All Sessions");
