@@ -1,4 +1,4 @@
-package exception;
+package com.berdibek.gym.exception;
 
 public class InvalidInputException extends Exception {
 

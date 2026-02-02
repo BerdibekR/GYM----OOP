@@ -1,7 +1,7 @@
 package com.berdibek.gym.menu;
 
 import com.berdibek.gym.model.*;
-import exception.InvalidInputException;
+import com.berdibek.gym.exception.InvalidInputException;
 
 import java.util.ArrayList;
 import java.util.Scanner;

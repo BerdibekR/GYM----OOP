@@ -1,6 +1,6 @@
 package com.berdibek.gym.model;
 
-import exception.InvalidInputException;
+import com.berdibek.gym.exception.InvalidInputException;
 
 public abstract class Member {
 
