@@ -1,6 +1,6 @@
 package com.berdibek.gym.menu;
 
-import com.berdibek.gym.*;
+import com.berdibek.gym.model.*;
 import exception.InvalidInputException;
 
 import java.util.ArrayList;
@@ -64,6 +64,8 @@ public class MenuManager implements Menu {
 
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid number.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
         }
         scanner.close();

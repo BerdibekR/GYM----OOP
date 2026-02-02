@@ -1,4 +1,4 @@
-package com.berdibek.gym;
+package com.berdibek.gym.model;
 
 import exception.InvalidInputException;
 

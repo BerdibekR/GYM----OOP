@@ -1,8 +1,9 @@
-package com.berdibek.gym;
+package com.berdibek.gym.model;
 
+import com.berdibek.gym.Discountable;
 import exception.InvalidInputException;
 
-public class SeniorMember extends Member {
+public class SeniorMember extends Member implements Discountable {
 
     private int retirementAge;
     private double healthDiscount;
@@ -26,6 +27,11 @@ public class SeniorMember extends Member {
         if (healthDiscount < 0 || healthDiscount > 100)
             throw new InvalidInputException("Discount must be 0–100.");
         this.healthDiscount = healthDiscount;
+    }
+
+    @Override
+    public double getDiscount() {
+        return healthDiscount;
     }
 
     @Override

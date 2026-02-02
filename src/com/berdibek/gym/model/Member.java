@@ -1,4 +1,4 @@
-package com.berdibek.gym;
+package com.berdibek.gym.model;
 
 import exception.InvalidInputException;
 
@@ -36,6 +36,10 @@ public abstract class Member {
     public void setAge(int age) throws InvalidInputException {
         if (age < 0)
             throw new InvalidInputException("Age cannot be negative.");
+
+        if (age > 120)
+            throw new IllegalArgumentException("Age too big.");
+
         this.age = age;
     }
 
