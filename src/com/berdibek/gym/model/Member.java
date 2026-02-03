@@ -18,6 +18,18 @@ public abstract class Member {
         setMembershipType(membershipType);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getMembershipType() {
+        return membershipType;
+    }
+
     public abstract void workout();
     public abstract String getRole();
 
