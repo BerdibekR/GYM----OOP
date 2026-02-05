@@ -1,6 +1,5 @@
 package com.berdibek.gym.model;
 
-import com.berdibek.gym.Discountable;
 import com.berdibek.gym.exception.InvalidInputException;
 
 public class SeniorMember extends Member implements Discountable {

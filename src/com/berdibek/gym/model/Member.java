@@ -8,6 +8,7 @@ public abstract class Member {
     protected String name;
     protected int age;
     protected String membershipType;
+    protected double monthlyFee;
 
     public Member(int memberId, String name, int age, String membershipType)
             throws InvalidInputException {
@@ -16,6 +17,11 @@ public abstract class Member {
         setName(name);
         setAge(age);
         setMembershipType(membershipType);
+        setMonthlyFee(monthlyFee);
+    }
+
+    public int getMemberId() {
+        return memberId;
     }
 
     public String getName() {
@@ -28,6 +34,10 @@ public abstract class Member {
 
     public String getMembershipType() {
         return membershipType;
+    }
+
+    public double getMonthlyFee() {
+        return monthlyFee;
     }
 
     public abstract void workout();
@@ -59,6 +69,12 @@ public abstract class Member {
         if (membershipType == null || membershipType.trim().isEmpty())
             throw new InvalidInputException("Membership type cannot be empty.");
         this.membershipType = membershipType;
+    }
+
+    public void setMonthlyFee(double monthlyFee) {
+        if (monthlyFee < 0)
+            throw new IllegalArgumentException("Fee cannot be negative");
+        this.monthlyFee = monthlyFee;
     }
 
     @Override

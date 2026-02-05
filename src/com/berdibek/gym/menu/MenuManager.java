@@ -1,133 +1,170 @@
 package com.berdibek.gym.menu;
 
-import com.berdibek.gym.model.*;
-import com.berdibek.gym.exception.InvalidInputException;
+import com.berdibek.gym.database.MemberDAO;
+import com.berdibek.gym.model.Member;
+import com.berdibek.gym.model.StudentMember;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuManager implements Menu {
 
-    private ArrayList<Member> members = new ArrayList<>();
-    private ArrayList<Trainer> trainers = new ArrayList<>();
-    private ArrayList<WorkoutSession> sessions = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
-
-    public MenuManager() {
-        seedData();
-    }
-
-    private void seedData() {
-        try {
-            members.add(new StudentMember(1, "Dastan", 19, "Student", "AITU"));
-            members.add(new PremiumMember(2, "Aibek", 28, "Premium", true));
-            members.add(new SeniorMember(3, "Samat", 61, "Senior", 60, 15));
-
-            trainers.add(new PersonalTrainer(101, "Aidar", "Strength", 4, 12));
-            trainers.add(new GroupTrainer(102, "Dana", "Yoga", 3, 18));
-
-            sessions.add(new CardioSession(1001, "Dastan", "Aidar", 45, true, 380));
-            sessions.add(new StrengthSession(1002, "Aibek", "Dana", 70, false, "Chest"));
-            sessions.add(new YogaSession(1003, "Aruzhan", "Dana", 50, false, "Intermediate", true));
-
-        } catch (InvalidInputException e) {
-            System.out.println("Error while creating data: " + e.getMessage());
-        }
-    }
+    private MemberDAO memberDAO = new MemberDAO();
 
     @Override
     public void displayMenu() {
-        System.out.println("\n========== GYM MANAGEMENT ==========");
-        System.out.println("1. Member Management");
-        System.out.println("2. Trainer Management");
-        System.out.println("3. Workout Session Management");
+
+        System.out.println("\n===== MEMBER MANAGEMENT =====");
+        System.out.println("1. Add Member");
+        System.out.println("2. View All Members");
+        System.out.println("3. View Student Members Only");
+        System.out.println("4. View Premium Members Only");
+        System.out.println("5. Update Member");
+        System.out.println("6. Delete Member");
+        System.out.println("7. Search by Name");
+        System.out.println("8. Search by Fee Range");
+        System.out.println("9. Search by Minimum Fee");
+        System.out.println("10. Polymorphism");
         System.out.println("0. Exit");
         System.out.print("Enter choice: ");
     }
 
     @Override
     public void run() {
-        boolean running = true;
 
-        while (running) {
+        while (true) {
+
             displayMenu();
+            int c = Integer.parseInt(scanner.nextLine());
+
+            switch (c) {
+                case 1 -> addMember();
+                case 2 -> memberDAO.getAllMembers();
+                case 3 -> filterStudent();
+                case 4 -> filterPremium();
+                case 5 -> updateMember();
+                case 6 -> deleteMember();
+                case 7 -> searchByName();
+                case 8 -> searchByRange();
+                case 9 -> searchByMin();
+                case 10 -> polymorphismDemo();
+                case 0 -> System.exit(0);
+                default -> System.out.println("Invalid option.");
+            }
+        }
+    }
+
+    private void addMember() {
+
+        try {
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+
+            System.out.print("Age: ");
+            int age = Integer.parseInt(scanner.nextLine());
+
+            System.out.print("Monthly fee: ");
+            double fee = Double.parseDouble(scanner.nextLine());
+
+            StudentMember m =
+                    new StudentMember(1, name, age, "Student", "AITU");
+
+            m.setMonthlyFee(fee);
+            memberDAO.insertMember(m);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void filterStudent() {
+        memberDAO.searchByName("")
+                .stream()
+                .filter(m -> m.getMembershipType().equalsIgnoreCase("Student"))
+                .forEach(System.out::println);
+    }
+
+    private void filterPremium() {
+        memberDAO.searchByName("")
+                .stream()
+                .filter(m -> m.getMembershipType().equalsIgnoreCase("Premium"))
+                .forEach(System.out::println);
+    }
+
+    private void updateMember() {
+
+        System.out.print("Enter Member ID: ");
+        int id = Integer.parseInt(scanner.nextLine());
+
+        Member m = memberDAO.getMemberById(id);
+        if (m == null) return;
+
+        System.out.print("New name [" + m.getName() + "]: ");
+        String name = scanner.nextLine();
+
+        if (!name.isEmpty()) {
             try {
-                int choice = Integer.parseInt(scanner.nextLine());
-
-                switch (choice) {
-                    case 1 -> memberMenu();
-                    case 2 -> trainerMenu();
-                    case 3 -> sessionMenu();
-                    case 0 -> running = false;
-                    default -> System.out.println("Invalid choice!");
-                }
-
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid number.");
-            } catch (IllegalArgumentException e) {
+                m.setName(name);
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
+                return;
             }
         }
-        scanner.close();
+
+        memberDAO.updateMember(m);
     }
 
-    private void memberMenu() {
-        System.out.println("\n------ MEMBER MENU ------");
-        System.out.println("1. View All Members");
-        System.out.println("2. Demonstrate Polymorphism");
-        System.out.print("Enter choice: ");
+    private void deleteMember() {
 
-        try {
-            int c = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter Member ID: ");
+        int id = Integer.parseInt(scanner.nextLine());
 
-            switch (c) {
-                case 1 -> members.forEach(System.out::println);
-                case 2 -> members.forEach(Member::workout);
-                default -> System.out.println("Invalid option.");
-            }
+        Member m = memberDAO.getMemberById(id);
+        if (m == null) return;
 
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input.");
+        System.out.println(m);
+        System.out.print("Confirm delete (yes/no): ");
+
+        if (scanner.nextLine().equalsIgnoreCase("yes")) {
+            memberDAO.deleteMember(id);
         }
     }
 
-    private void trainerMenu() {
-        System.out.println("\n------ TRAINER MENU ------");
-        System.out.println("1. View All Trainers");
-        System.out.println("2. Demonstrate Polymorphism");
-        System.out.print("Enter choice: ");
+    private void searchByName() {
 
-        try {
-            int c = Integer.parseInt(scanner.nextLine());
-
-            switch (c) {
-                case 1 -> trainers.forEach(System.out::println);
-                case 2 -> trainers.forEach(Trainer::conductSession);
-                default -> System.out.println("Invalid option.");
-            }
-
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input.");
-        }
+        System.out.print("Name: ");
+        memberDAO.searchByName(scanner.nextLine())
+                .forEach(System.out::println);
     }
 
-    private void sessionMenu() {
-        System.out.println("\n------ SESSION MENU ------");
-        System.out.println("1. View All Sessions");
-        System.out.println("2. Demonstrate Polymorphism");
-        System.out.print("Enter choice: ");
+    private void searchByRange() {
 
-        try {
-            int c = Integer.parseInt(scanner.nextLine());
+        System.out.print("Min fee: ");
+        double min = Double.parseDouble(scanner.nextLine());
 
-            switch (c) {
-                case 1 -> sessions.forEach(System.out::println);
-                case 2 -> sessions.forEach(WorkoutSession::start);
-                default -> System.out.println("Invalid option.");
-            }
+        System.out.print("Max fee: ");
+        double max = Double.parseDouble(scanner.nextLine());
 
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input.");
+        memberDAO.searchByFeeRange(min, max)
+                .forEach(System.out::println);
+    }
+
+    private void searchByMin() {
+
+        System.out.print("Minimum fee: ");
+        double min = Double.parseDouble(scanner.nextLine());
+
+        memberDAO.searchByMinFee(min)
+                .forEach(System.out::println);
+    }
+
+    private void polymorphismDemo() {
+
+        List<Member> list = memberDAO.searchByName("");
+
+        for (Member m : list) {
+            m.workout();
         }
     }
 }
